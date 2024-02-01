@@ -15,9 +15,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
-MAIN_URL = "https://samokat.ru"
-CATEGORY_TEST_URL = \
-    "https://samokat.ru/category/92f6c90d-e7ce-42b8-9b02-4203e6dec3f9"
 
 # Qty of iterations of this parser just to check the stability of it
 TEST_LIMITS = 16
@@ -28,7 +25,8 @@ TEST_LIMITS = 16
 # example: DATABASE_URL=postgresql://myuser:mypassword@localhost:5432/mydb
 DATABASE_URL = "postgresql://postgres:444305@localhost:5432/postgres"
 
-with open("parser/data/category_all_products.json", "r", encoding='utf-8') as file:
+with open("parser/data/category_all_products.json",
+          "r", encoding='utf-8') as file:
     products_dict = json.load(file)
 
 
@@ -41,12 +39,9 @@ def main(products_dict: dict = products_dict) -> None:
 
     while limit < TEST_LIMITS:
         for product_link in products_dict.values():
-            chrome_options = Options()
-            user_agent = UserAgent()
-            chrome_options.add_argument(f"user-agent={user_agent.random}")
 
             # Initialize the Chrome browser
-            driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Chrome()
 
             # Open the webpage
             driver.get(product_link)
@@ -82,7 +77,8 @@ def main(products_dict: dict = products_dict) -> None:
 
             try:
                 product_marketing_description = (
-                    soup.find(class_=re.compile("ProductDescription_description"))
+                    soup.find(
+                        class_=re.compile("ProductDescription_description"))
                     .find("div").text.strip())
             except Exception:
                 product_marketing_description = None
@@ -118,39 +114,45 @@ def main(products_dict: dict = products_dict) -> None:
 
             try:
                 product_composition = (
-                    soup.find(class_=re.compile("ProductAttributes_attributes"))
+                    soup.find(
+                        class_=re.compile("ProductAttributes_attributes"))
                     .find_all("span")[1].text.strip())
             except Exception:
                 product_composition = None
 
             try:
                 product_shelf_life = (
-                    soup.find(class_=re.compile("ProductAttributes_attributes"))
+                    soup.find(
+                        class_=re.compile("ProductAttributes_attributes"))
                     .find_all("span")[3].text.strip())
             except Exception:
                 product_shelf_life = None
 
             try:
                 product_storage_conditions = (
-                    soup.find(class_=re.compile("ProductAttributes_attributes"))
+                    soup.find(
+                        class_=re.compile("ProductAttributes_attributes"))
                     .find_all("span")[5].text.strip())
             except Exception:
                 product_storage_conditions = None
 
             try:
                 product_manufacturer = (
-                    soup.find(class_=re.compile("ProductAttributes_attributes"))
+                    soup.find(
+                        class_=re.compile("ProductAttributes_attributes"))
                     .find_all("span")[7].text.strip())
             except Exception:
                 product_manufacturer = None
 
             product_old_price = (
-                soup.find(class_=re.compile("ProductCardActions_text"))
+                soup.find(
+                    class_=re.compile("ProductCardActions_text"))
                 .find_all("span")[1].text.strip())
 
             try:
                 product_new_price = (
-                    soup.find(class_=re.compile("ProductCardActions_root"))
+                    soup.find(
+                        class_=re.compile("ProductCardActions_root"))
                     .find_all("span")[2].text.strip())
             except Exception:
                 product_new_price = None

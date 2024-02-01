@@ -13,16 +13,14 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 
-# Qty of iterations of this parser just to check the stability of it
-TEST_LIMITS = 16
-
 # Get the DB_URL from your environment file
 # You should change in your build.sh file
 # (format: {provider}://{user}:{password}@{host}:{port}/{db})
 # example: DATABASE_URL=postgresql://myuser:mypassword@localhost:5432/mydb
 DATABASE_URL = "postgresql://postgres:444305@localhost:5432/postgres"
 
-with open("parser/data/all_categories_dict.json", "r", encoding='utf-8') as file:
+with open("parser/data/all_categories_dict.json",
+          "r", encoding='utf-8') as file:
     all_categories_dict = json.load(file)
 
 
@@ -44,7 +42,8 @@ def main(all_categories_dict: dict = all_categories_dict) -> None:
     time.sleep(3)
 
     # Make HTML file to work with
-    with open('parser/data/all_products_data.html', 'w', encoding='utf-8') as file:
+    with open('parser/data/all_products_data.html',
+              'w', encoding='utf-8') as file:
         file.write(html)
 
     # Close the browser
@@ -53,7 +52,8 @@ def main(all_categories_dict: dict = all_categories_dict) -> None:
     time.sleep(3)
 
     # Open HTML file to take all data
-    with open('parser/data/all_products_data.html', encoding="utf-8") as file:
+    with open('parser/data/all_products_data.html',
+              "r", encoding="utf-8") as file:
         src = file.read()
 
     # Create a BeautifulSoup object
@@ -71,7 +71,9 @@ def main(all_categories_dict: dict = all_categories_dict) -> None:
 
         try:
             product_volume = (
-                product.find(class_=re.compile("ProductCard_details")).find_all("span").text.strip())
+                product.find(
+                    class_=re.compile("ProductCard_details"))
+                .find_all("span").text.strip())
         except Exception:
             product_volume = None
 

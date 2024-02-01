@@ -40,7 +40,8 @@ def main(url: str = MAIN_URL) -> dict:
         all_categories_dict[category_text] = category_url
 
     # Save the dictionary to a JSON file
-    with open("parser/data/all_categories_dict.json", "w", encoding='utf-8') as file:
+    with open("parser/data/all_categories_dict.json",
+              "w", encoding='utf-8') as file:
         json.dump(all_categories_dict, file, indent=4, ensure_ascii=False)
 
 

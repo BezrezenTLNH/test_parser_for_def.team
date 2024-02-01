@@ -1,11 +1,9 @@
+import json
 import re
 import time
-import json
 
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
 MAIN_URL = "https://samokat.ru"
@@ -14,7 +12,8 @@ CATEGORY_TEST_URL = \
 
 
 def main() -> dict:
-    with open("parser/data/all_categories_dict.json", "r", encoding='utf-8') as file:
+    with open("parser/data/all_categories_dict.json",
+              "r", encoding='utf-8') as file:
         all_categories_dict = json.load(file)
     url = [i for i in all_categories_dict.values()][0]
 
@@ -52,12 +51,15 @@ def main() -> dict:
     for data in all_data_for_names:
         for product in data:
             product_name = (
-                product.find(class_=re.compile("ProductCard_name")).text.replace(" ", ' ').strip())
+                product.find(
+                    class_=re.compile("ProductCard_name"))
+                .text.replace(" ", ' ').strip())
             product_link = 'https://samokat.ru' + product.get("href")
             products_dict[product_name] = product_link
 
     # Save the dictionary to a JSON file
-    with open(f"parser/data/category_all_products.json", "w", encoding='utf-8') as file:
+    with open("parser/data/category_all_products.json",
+              "w", encoding='utf-8') as file:
         json.dump(products_dict, file, indent=4, ensure_ascii=False)
 
 
