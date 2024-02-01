@@ -10,11 +10,8 @@ from datetime import date
 import psycopg2
 import psycopg2.extras
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
-
 
 # Qty of iterations of this parser just to check the stability of it
 TEST_LIMITS = 16
