@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "test-parser-for-def-team"
+version = "0.1.0"
+description = "Sipmle (actually hard but really how are you who reading this?) parser created special for parsing samokat website"
+authors = ["Mikhail Zherebtsov <bezrezen97@gmail.com>"]
+readme = "README.md"
+packages = [{include = "parser"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+beautifulsoup4 = "^4.12.3"
+lxml = "^5.1.0"
+selenium = "^4.17.2"
+flake8 = "^7.0.0"
+postgres = "^4.0"
+psycopg2-binary = "^2.9.9"
+fake-useragent = "^1.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+quick_search = "parser.quick_search:main"
+deep_search = "parser.deep_search:main"
+get_categories = "parser.get_categories:main"
+get_data_from_category = "parser.get_data_from_category:main"

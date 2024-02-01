@@ -1,0 +1,1 @@
+psql -a postgresql://postgres:444305@localhost:5432/postgres -f database.sql
