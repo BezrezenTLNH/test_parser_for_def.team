@@ -1,5 +1,5 @@
 # Description 
-### This is a parser for samokat website. Without proxies. So all the files will be saved as .html and .json files to work with data. easily
+### This is a parser for samokat website. Without proxies. So all the files will be saved as .html and .json files to work with data easily
 
 # Requirements
 * python ^3.10
