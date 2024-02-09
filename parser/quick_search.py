@@ -72,8 +72,8 @@ def main(all_categories_dict: dict = all_categories_dict) -> None:
         try:
             product_volume = (
                 product.find(
-                    class_=re.compile("ProductCard_details"))
-                .find_all("span").text.strip())
+                    class_=re.compile("ProductCard_specification"))
+                .find("span").text.strip())
         except Exception:
             product_volume = None
 
